@@ -1,7 +1,7 @@
 <template>
     <Card class="workerList" title="Liste des ouvriers">
         <template v-slot:main>
-            <div class="workerRow" v-for="(worker, index) in allWorkers" :key="worker.id">
+            <div class="workerRow" v-for="(worker, index) in allWorkers.listeOuvriers" :key="worker.id">
                 <div>
                     <p>{{ index }}</p>
                 </div>
@@ -19,7 +19,6 @@
                 </div>
                 <div>
                     <a href="#" class="deleteButton" v-on:click.prevent="handleClick(worker.id)">Supprimer</a>
-                    <a href="#" class="editButton">Modifier</a>
                 </div>
             </div>
         </template>
@@ -41,7 +40,7 @@
     const allWorkers = ref([]);
 
     function loadData(){
-        getAllWorkers().then(
+        getAllWorkers(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
             (response) => {
                 allWorkers.value = response;
             }

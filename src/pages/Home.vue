@@ -13,7 +13,7 @@
         <Card class="workers" title="Ouvriers - Listes des ouvriers">
             <template v-slot:main>           
                 <div class="informationTable" v-if="allWorkers > []">
-                    <div class="informationRow" v-for="worker in allWorkers" :key="worker.id">
+                    <div class="informationRow" v-for="worker in allWorkers.listeOuvriers" :key="worker.id">
                         <div>
                             <p>{{ worker.id }}</p>
                         </div>
@@ -33,9 +33,9 @@
         <Card class="field" title="Champs - Listes des champs">
             <template v-slot:main>           
                 <div class="informationTable">
-                    <div class="informationRow" v-for="field in allField" :key="field.id">
+                    <div class="informationRow" v-for="(field, index) in allField" :key="field.id">
                         <div>
-                            <p>{{ field.id }}</p>
+                            <p>{{ index }}</p>
                         </div>
                         <div>
                             <p>{{ field.label }}</p>
@@ -85,7 +85,7 @@ import { getAllField } from '@/services/fieldServices';
 
     const allWorkers = ref([]);
 
-    getAllWorkers().then(
+    getAllWorkers(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
         (response) => {
             allWorkers.value = response;
         }
@@ -93,7 +93,7 @@ import { getAllField } from '@/services/fieldServices';
 
     const allField = ref();
 
-    getAllField().then(
+    getAllField(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
         (response) => {
             allField.value = response;
         }

@@ -79,9 +79,9 @@ export async function getSingleWorkers(id)
         throw new Error('Impossible de contacter le serveur');             
     }    
 
-export async function getAllWorkers()
+export async function getAllWorkers(id)
     {
-        const response = await fetch(`http://localhost:8080/simplyField/webresources/users/allWorkers/`, {
+        const response = await fetch(`http://localhost:8080/simplyField/webresources/domain/singleDomain/${id}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',

@@ -12,10 +12,10 @@
                     <p>{{ field.surface }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_proprietaire }}</p>
+                    <p>{{ field.typeSol.label }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_domaine }}</p>
+                    <p>{{ field.typeSol.pH }}</p>
                 </div>
                 <div>
                     <a href="#" class="deleteButton" v-on:click.prevent="handleClick(field.id)">Supprimer</a>
@@ -39,7 +39,7 @@
     const allField = ref([]);
 
     function loadData(){
-        getAllField().then(
+        getAllField(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
             (response) => {
                 allField.value = response;
             }

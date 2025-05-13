@@ -1,6 +1,6 @@
-export async function getAllField()
+export async function getAllField(id)
     {
-        const response = await fetch(`http://localhost:8080/simplyField/webresources/field/allFields/`, {
+        const response = await fetch(`http://localhost:8080/simplyField/webresources/field/fieldByOwner/${id}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
