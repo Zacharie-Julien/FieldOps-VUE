@@ -1,25 +1,25 @@
 <template>
-    <Card class="fieldList" title="Liste des ouvriers">
+    <Card class="workerList" title="Liste des ouvriers">
         <template v-slot:main>
-            <div class="fieldRow" v-for="field in jsonField" :key="field.id">
+            <div class="workerRow" v-for="(worker, index) in allWorkers" :key="worker.id">
                 <div>
-                    <p>{{ field.id }}</p>
+                    <p>{{ index }}</p>
                 </div>
                 <div>
-                    <p>{{ field.label }}</p>
+                    <p>{{ worker.nom }}</p>
                 </div>
                 <div>
-                    <p>{{ field.surface }}</p>
+                    <p>{{ worker.prenom }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_proprietaire }}</p>
+                    <p>{{ worker.numero }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_domaine }}</p>
+                    <p>{{ worker.telephone }}</p>
                 </div>
                 <div>
-                    <p class="deleteButton">Supprimer</p>
-                    <p class="editButton">Modifier</p>
+                    <a href="#" class="deleteButton" v-on:click.prevent="handleClick(worker.id)">Supprimer</a>
+                    <a href="#" class="editButton">Modifier</a>
                 </div>
             </div>
         </template>
@@ -29,104 +29,44 @@
 
 <script setup>
 
+    import { ref, onMounted } from 'vue';
+    import { getAllWorkers, deleteWorkerById } from '@/services/userServices';
     import Card from '../components/Card.vue'
     import Pellet from '../components/Pellet.vue'
 
-    var jsonField = 
-    [
-        {
-        "id": 1,
-        "label": "Champ Nord",
-        "surface": 1000,
-        "id_proprietaire": 1,
-        "id_domaine": 1,
-        "id_type_de_sol": 'Sable'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        }
-    ];
+    onMounted(() => {
+        loadData();
+    });
+
+    const allWorkers = ref([]);
+
+    function loadData(){
+        getAllWorkers().then(
+            (response) => {
+                allWorkers.value = response;
+            }
+        );
+    }
+
+    function handleClick(id){
+        deleteWorkerById(id).then(()=>{
+            setTimeout(() => {
+                loadData();
+            }, 50);
+        });
+    }
 
 </script>
 
 <style scoped>
 
-    .fieldList 
+    .workerList 
     {
         grid-row: 2 / 49;
         grid-column: 2 / 48;
     }
 
-    .fieldRow 
+    .workerRow 
     {
         width: 95%;
         height: 40px;
@@ -137,7 +77,7 @@
 
     }
 
-    .fieldRow > div 
+    .workerRow > div 
     {
 
         display: flex;
@@ -147,7 +87,7 @@
         border-bottom: solid 1px var(--main-border-gray);
     }
 
-    .fieldRow > div > p 
+    .workerRow > div > a, p
     {
         color: var(--main-title-gray);
         text-decoration: none;

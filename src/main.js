@@ -1,14 +1,48 @@
 
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 import VueApexCharts from "vue3-apexcharts";
 import { createApp } from 'vue'
 import routes from './routes'
 import App from './App.vue'
+import { loginUser } from './services/loginServices';
 
 const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHistory(),
     routes,
 })
+
+router.beforeEach((to, from, next) => {
+  const token = document.cookie.split('.')[1];
+
+  if (!token && to.name !== 'login') {
+    return next({ name: 'login' });
+  }
+
+  if (token) {
+        try {
+            const payload = JSON.parse(atob(token));
+            const requireRole = to.meta.requireRole;
+
+
+
+            if (payload.role !== requireRole) {
+                if (to.name === 'login') {                
+                    return next();
+                }
+                if (to.name !== 'unauthorized') {
+                    return next({ name: 'unauthorized' });
+                }
+                return next();
+            }
+
+        } catch (e) {
+            if (to.name !== 'login') {
+                return next({ name: 'login' });    
+            }            
+        }
+    }
+    next();
+});
 
 const app = createApp(App);
 app.use(router);

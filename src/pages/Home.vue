@@ -75,16 +75,13 @@
     import Pellet from '../components/Pellet.vue'
     import {getAllOwners, getAllUsers, getAllWorkers} from '../services/userServices.js';
 import { getAllField } from '@/services/fieldServices';
-
     
-
     const series = ref([
         {
             name: "Températures",
             data: ['30', '31', '28', '26', '34']
         }
     ]); 
-
 
     const allWorkers = ref([]);
 
@@ -101,7 +98,6 @@ import { getAllField } from '@/services/fieldServices';
             allField.value = response;
         }
     );
-
 
     const options = ref({
         xaxis: {

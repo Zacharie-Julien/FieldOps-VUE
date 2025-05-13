@@ -6,7 +6,7 @@
                 <div></div>
             </div>
             <li class="home">
-                <RouterLink to="/">Accueil</RouterLink> 
+                <RouterLink to="/home">Accueil</RouterLink> 
             </li>
             <li class="field">
                 <RouterLink to="/field">
