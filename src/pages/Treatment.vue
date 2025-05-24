@@ -1,21 +1,21 @@
 <template>
     <Card class="fieldList" title="Liste des traitements">
         <template v-slot:main>
-            <div class="fieldRow" v-for="field in jsonField" :key="field.id">
+            <div class="fieldRow" v-for="operation in allOperation" :key="operation.id">
                 <div>
-                    <p>{{ field.id }}</p>
+                    <p>{{ operation.champ.label }}</p>
+                </div>
+                <div>                    
+                    <p>{{ operation.traitement.produit.label }}</p>
                 </div>
                 <div>
-                    <p>{{ field.label }}</p>
+                    <p>{{ operation.traitement.produit.dre }}</p>
                 </div>
                 <div>
-                    <p>{{ field.surface }}</p>
+                    <p>{{ operation.ouvrier.nom }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_proprietaire }}</p>
-                </div>
-                <div>
-                    <p>{{ field.id_domaine }}</p>
+                    <p>{{ operation.ouvrier.prenom }}</p>
                 </div>
                 <div>
                     <p class="deleteButton">Supprimer</p>
@@ -29,93 +29,19 @@
 
 <script setup>
 
+    import { ref } from 'vue'
     import Card from '../components/Card.vue'
+    import { getAllOperationById } from '@/services/operationServices'
     import Pellet from '../components/Pellet.vue'
 
-    var jsonField = 
-    [
-        {
-        "id": 1,
-        "label": "Champ Nord",
-        "surface": 1000,
-        "id_proprietaire": 1,
-        "id_domaine": 1,
-        "id_type_de_sol": 'Sable'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        },
-        {
-        "id": 2,
-        "label": "Champ Sud",
-        "surface": 800,
-        "id_proprietaire": 2,
-        "id_domaine": 2,
-        "id_type_de_sol": 'Terre de bruyère'
-        }
-    ];
+    const allOperation = ref();
 
+    getAllOperationById(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
+        (response) => {
+            allOperation.value = response;  
+        }
+    );
+            
 </script>
 
 <style scoped>

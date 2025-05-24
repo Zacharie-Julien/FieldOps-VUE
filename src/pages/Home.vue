@@ -71,8 +71,8 @@
 
 <script setup>
     import { ref } from 'vue';
-    import Card from '../components/Card.vue'
-    import Pellet from '../components/Pellet.vue'
+    import Card from '../components/Card.vue';
+    import Pellet from '../components/Pellet.vue';
     import {getAllOwners, getAllUsers, getAllWorkers} from '../services/userServices.js';
 import { getAllField } from '@/services/fieldServices';
     

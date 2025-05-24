@@ -22,7 +22,7 @@ const route = [
     }},
     { path : '/treatment', name: 'treatment', component : Treatment, meta: {
             requireRole : 'admin'
-    }},    
+    }},     
     { path : '/unauthorized', name: 'unauthorized', component : Unauthorized }
 ];
 
