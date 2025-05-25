@@ -5,10 +5,10 @@ export async function loginUser(login, password)
         {
             method: 'GET',
             credentials: 'include'
-    }).then((response)=>{
-        if (response.status == 200) {
-            window.location.replace('http://localhost:5173/home');
-        }
-    });     
+    });
+    if (response.status == 200) {
+        window.location.replace('http://localhost:5173/home');
+    }
+         
 
 }

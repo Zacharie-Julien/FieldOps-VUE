@@ -1,21 +1,21 @@
 <template>
     <Card class="fieldList" title="Liste des traitements">
         <template v-slot:main>
-            <div class="fieldRow" v-for="field in allField" :key="field.id">
+            <div class="fieldRow" v-for="operation in allOperation" :key="operation.id">
                 <div>
-                    <p>{{ field.label }}</p>
+                    <p>{{ operation.champ.label }}</p>
                 </div>
                 <div>                    
-                    <p>{{ field.traitement.produit.label }}</p>
+                    <p>{{ operation.traitement.produit.label }}</p>
                 </div>
                 <div>
-                    <p>{{ field.traitement.produit.dre }}</p>
+                    <p>{{ operation.traitement.produit.dre }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_proprietaire }}</p>
+                    <p>{{ operation.ouvrier.nom }}</p>
                 </div>
                 <div>
-                    <p>{{ field.id_domaine }}</p>
+                    <p>{{ operation.ouvrier.prenom }}</p>
                 </div>
                 <div>
                     <p class="deleteButton">Supprimer</p>
@@ -31,14 +31,14 @@
 
     import { ref } from 'vue'
     import Card from '../components/Card.vue'
-    import { getAllField } from '@/services/fieldServices'
+    import { getAllOperationById } from '@/services/operationServices'
     import Pellet from '../components/Pellet.vue'
 
-    const allField = ref([]);
+    const allOperation = ref();
 
-    getAllField(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
+    getAllOperationById(JSON.parse(atob(document.cookie.split('.')[1])).id).then(
         (response) => {
-            allField.value = response.filter(field => typeof field.traitement !== 'undefined');  
+            allOperation.value = response;  
         }
     );
             

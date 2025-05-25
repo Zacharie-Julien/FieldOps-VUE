@@ -30,8 +30,8 @@
     }
         .picture div 
         {
-            width: 270px;
-            height: 270px;
+            width: 200px;
+            height: 200px;
 
             border-radius: 360px;
             background-color: blue;

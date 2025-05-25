@@ -1,7 +1,6 @@
 import Domains from './pages/Domains.vue';
 import Unauthorized from './pages/errors/Unauthorized.vue';
 import Field from './pages/Field.vue';
-import FieldModification from './pages/FieldModification.vue';
 import Home from './pages/Home.vue'
 import Login from './pages/Login.vue';
 import Treatment from './pages/Treatment.vue';
@@ -23,10 +22,7 @@ const route = [
     }},
     { path : '/treatment', name: 'treatment', component : Treatment, meta: {
             requireRole : 'admin'
-    }},    
-    { path : '/modificationField/:name/:area/:groundType', name: 'modificationField', component : FieldModification, meta: {
-            requireRole : 'admin'
-    }},    
+    }},     
     { path : '/unauthorized', name: 'unauthorized', component : Unauthorized }
 ];
 

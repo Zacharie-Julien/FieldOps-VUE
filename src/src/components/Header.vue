@@ -1,12 +1,11 @@
 <template>
-
     <nav>
         <ul>
             <div class="topBar">
                 <div></div>
             </div>
             <li class="home">
-                <RouterLink to="/home">Accueil</RouterLink> 
+                <RouterLink to="/home">Accueil</RouterLink>
             </li>
             <li class="field">
                 <RouterLink to="/field">
@@ -21,7 +20,7 @@
             <li class="domains">
                 <RouterLink to="/domains">
                     Mon domaine
-                </RouterLink>                
+                </RouterLink>
             </li>
             <li class="treatment">
                 <RouterLink to="/treatment">
@@ -40,9 +39,9 @@
 
 <style scoped>
 
-    nav 
+    nav
     {
-        
+
         width: 100%;
         height: 100%;
 
@@ -58,7 +57,7 @@
         grid-template-rows: repeat(30, 1fr);
     }
 
-    nav ul li 
+    nav ul li
     {
         display: flex;
         align-items: center;
@@ -66,13 +65,13 @@
         transition-duration: .125s;
     }
 
-    nav ul li:hover 
+    nav ul li:hover
     {
         transition-duration: .125s;
         background-color: var(--main-black);
     }
 
-    nav ul li a 
+    nav ul li a
     {
         text-decoration: none;
         list-style: none;
@@ -88,14 +87,14 @@
         margin-left: 50px;
     }
 
-    nav ul li a:hover 
+    nav ul li a:hover
     {
         transition-duration: .125s;
         color: var(--main-green);
         cursor: pointer;
     }
 
-    .nameLogo 
+    .nameLogo
     {
         grid-row: 1 / 3;
         grid-column: 1;
@@ -106,7 +105,7 @@
 
         background-color: var(--main-green);
     }
-        .nameLogo p 
+        .nameLogo p
         {
             margin-left: 30px;
 
@@ -115,7 +114,7 @@
             font-size: 3em;
         }
 
-    .topBar 
+    .topBar
     {
         grid-row: 9;
         grid-column: 1;
@@ -126,7 +125,7 @@
 
     }
 
-        .topBar > div 
+        .topBar > div
         {
             height: 2px;
             width: 87%;
@@ -135,31 +134,31 @@
             background-color: var(--main-green);
         }
 
-    .home 
+    .home
     {
         grid-row: 10;
         grid-column: 1;
     }
 
-    .field 
+    .field
     {
         grid-row: 11;
         grid-column: 1;
     }
 
-    .workers 
+    .workers
     {
         grid-row: 12;
         grid-column: 1;
     }
 
-    .domains 
+    .domains
     {
         grid-row: 13;
         grid-column: 1;
     }
 
-    .treatment 
+    .treatment
     {
         grid-row: 14;
         grid-column: 1;

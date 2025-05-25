@@ -2,9 +2,12 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import VueApexCharts from "vue3-apexcharts";
 import { createApp } from 'vue'
+import PrimeVue from 'primevue/config'
 import routes from './routes'
 import App from './App.vue'
 import { loginUser } from './services/loginServices';
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,7 +27,7 @@ router.beforeEach((to, from, next) => {
             const requireRole = to.meta.requireRole;
 
             if (payload.role !== requireRole) {
-                if (to.name === 'login') {                
+                if (to.name === 'login') {
                     return next();
                 }
                 if (to.name !== 'unauthorized') {
@@ -39,8 +42,8 @@ router.beforeEach((to, from, next) => {
 
         } catch (e) {
             if (to.name !== 'login') {
-                return next({ name: 'login' });    
-            }            
+                return next({ name: 'login' });
+            }
         }
     }
     next();
@@ -50,6 +53,6 @@ const app = createApp(App);
 app.use(router);
 app.use(VueApexCharts);
 app.mount('#app');
-
-
+app.use(PrimeVue);
+app.use(ToastService);
 
