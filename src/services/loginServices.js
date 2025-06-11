@@ -7,7 +7,12 @@ export async function loginUser(login, password)
             credentials: 'include'
     });
     if (response.status == 200) {
-        window.location.replace('http://localhost:5173/home');
+        if (JSON.parse(atob(document.cookie.split('.')[1])).role === 'admin') {
+            window.location.replace('http://localhost:5173/home');    
+        }
+        else {
+            window.location.replace('http://localhost:5173/userHome');    
+        }   
     }
          
 

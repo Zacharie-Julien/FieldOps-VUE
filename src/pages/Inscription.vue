@@ -1,11 +1,13 @@
 <template>
-    <Card title="Login" class="login">
+    <Card title="Inscription" class="login">
         <template v-slot:main>
             <form class="mainLogin">
                 <input type="text" v-model="login" placeholder="Identifiant">
-                <input type="password" class="password" v-model="password" placeholder="Mot de passe">
+                <input type="text" class="password" v-model="email" placeholder="Mail">
+                <input type="password" class="password" v-model="password" placeholder="Entrer votre mot de passe">
+                <input type="password" class="password" v-model="password2" placeholder="Confirmer votre mot de passe">
                 <div>
-                    <button type="button" v-on:click="loginUser(login, password)">Connexion</button>
+                    <RouterLink to="/">Connexion</RouterLink>
                     <p>ou</p>
                     <RouterLink to="/inscription">Inscription</RouterLink>
                 </div>                
@@ -25,6 +27,8 @@
     const router = useRouter();
     const login = ref('');
     const password = ref('');
+    const password2 = ref('');
+    const email = ref('');
 
 </script>
 

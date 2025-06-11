@@ -1,13 +1,15 @@
-import Domains from './pages/Domains.vue';
 import Unauthorized from './pages/errors/Unauthorized.vue';
-import Field from './pages/Field.vue';
-import Home from './pages/Home.vue'
+import Field from './pages/_admin/Field.vue';
+import Home from './pages/_admin/Home.vue'
 import Login from './pages/Login.vue';
-import Treatment from './pages/Treatment.vue';
-import Workers from './pages/Workers.vue';
+import Inscription from './pages/Inscription.vue';
+import Treatment from './pages/_admin/Treatment.vue';
+import Workers from './pages/_admin/Workers.vue';
+import UserHome from './pages/_users/UserHome.vue';
 
 const route = [
     { path : '/', name: 'login', component : Login },
+    { path : '/inscription', name: 'inscription', component : Inscription },
     { path : '/home', name: 'home', component : Home, meta: {
             requireRole : 'admin'
     } },
@@ -17,12 +19,12 @@ const route = [
     { path : '/workers', name: 'workers', component : Workers, meta: {
             requireRole : 'admin'
     }},
-    { path : '/domains', name: 'domains', component : Domains, meta: {
-            requireRole : 'admin'
-    }},
     { path : '/treatment', name: 'treatment', component : Treatment, meta: {
             requireRole : 'admin'
-    }},     
+    }}, 
+    { path : '/userHome', name: 'userHome', component : UserHome, meta: {
+            requireRole : 'utilisateur'
+    } },    
     { path : '/unauthorized', name: 'unauthorized', component : Unauthorized }
 ];
 

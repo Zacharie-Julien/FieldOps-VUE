@@ -8,22 +8,7 @@
                 <div></div>
             </div>
             <li class="home">
-                <RouterLink to="/home">Accueil</RouterLink>
-            </li>
-            <li class="field">
-                <RouterLink to="/field">
-                    Mes champs
-                </RouterLink>
-            </li>
-            <li class="workers">
-                <RouterLink to="/workers">
-                    Mes ouvriers
-                </RouterLink>
-            </li>
-            <li class="treatment">
-                <RouterLink to="/treatment">
-                    Traitements
-                </RouterLink>
+                <RouterLink to="/UserHome">Accueil</RouterLink>
             </li>
         </ul>
     </nav>
@@ -146,21 +131,9 @@
         grid-column: 1;
     }
 
-    .field
-    {
-        grid-row: 11;
-        grid-column: 1;
-    }
-
-    .workers
-    {
-        grid-row: 12;
-        grid-column: 1;
-    }
-
     .treatment
     {
-        grid-row: 13;
+        grid-row: 11;
         grid-column: 1;
     }
 

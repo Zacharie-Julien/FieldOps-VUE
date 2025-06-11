@@ -75,3 +75,19 @@ export async function updateField(id, label, surface, typeSol){
 
     throw new Error('Impossible de contacter le serveur');
 }
+
+export async function addField(label, surface, idOwner, typeSol, idDomaine){
+    const response = await fetch(`http://localhost:8080/simplyField/webresources/field/addField/${label}/${surface}/${idOwner}/${typeSol}/${idDomaine}`, { 
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': document.cookie.slice(document.cookie.indexOf('JWT=') + 4),
+        }
+    });
+
+    if (response.ok === true) {
+        return response.json
+    }
+
+    throw new Error('Impossible de contacter le serveur');
+}

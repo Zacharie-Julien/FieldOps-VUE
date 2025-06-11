@@ -1,5 +1,5 @@
 
-import { createWebHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router';
 import VueApexCharts from "vue3-apexcharts";
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config'
@@ -11,13 +11,13 @@ import Toast from 'primevue/toast';
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes
 })
 
 router.beforeEach((to, from, next) => {
   const token = document.cookie.split('.')[1];
 
-  if (!token && to.name !== 'login') {
+  if (!token && to.name !== 'login' && to.name !== 'inscription') {
     return next({ name: 'login' });
   }
 
@@ -25,10 +25,14 @@ router.beforeEach((to, from, next) => {
         try {
             const payload = JSON.parse(atob(token));
             const requireRole = to.meta.requireRole;
-
+            
             if (payload.role !== requireRole) {
                 if (to.name === 'login') {
-                    return next();
+                    if (payload.role === 'admin') {      
+                        return next({ name: 'home' });    
+                    } else {
+                        return next({ name: 'userHome' });    
+                    }    
                 }
                 if (to.name !== 'unauthorized') {
                     return next({ name: 'unauthorized' });

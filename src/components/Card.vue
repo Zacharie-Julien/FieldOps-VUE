@@ -53,7 +53,7 @@
             margin-left: 15px;
         }
     
-        .mainCard 
+    .mainCard 
     {
         grid-row: 2;
 

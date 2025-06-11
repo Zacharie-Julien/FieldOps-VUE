@@ -1,13 +1,8 @@
 <template>
     <div>
-        <h1>
-            Mon Footer
-        </h1>
+        <p> 2025 Zacharie Julien. Tous droits réservés.</p>        
     </div>    
 </template>
-
-    
-
 
 <script setup>
 
@@ -22,19 +17,25 @@
 
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
 
         text-transform: uppercase;        
     }
 
-    h1 
+    div p
     {
-        color: white;
-        font-family: 'Courier New', Courier, monospace;
+        margin-left: 20px;
+        color: var(--main-title-gray);
+        text-decoration: none;
+        list-style: none;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-optical-sizing: auto;
-        font-weight: 200;
+        font-weight: 100;
         font-style: normal;
-        font-size: 30px;
+        font-size: 20px;
+        word-spacing: 1px;
+        transition-duration: .125s;
+
     }
 
 </style>
