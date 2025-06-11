@@ -89,7 +89,7 @@ public class FieldWAR {
     }
        
     
-    
+    @Secured
     @POST
     @Path("/addField/{label}/{surface}/{idOwner}/{idType}/{idDomaine}")
     @Produces(MediaType.APPLICATION_JSON)

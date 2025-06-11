@@ -58,9 +58,8 @@ public class OperationWAR {
             @PathParam("id_traitement") Integer id_traitement,
             @PathParam("id_champ") Integer id_champ,        
             @PathParam("id_ouvrier") Integer id_ouvrier,
-            @PathParam("statut") Boolean statut,
             @PathParam("dateNow") Timestamp dateNow){
-        ejb.addOperation(id_traitement, id_champ, id_ouvrier, statut, dateNow);
+        ejb.addOperation(id_traitement, id_champ, id_ouvrier, true, dateNow);
     }   
     
     
@@ -70,10 +69,20 @@ public class OperationWAR {
         @PathParam("id_traitement") Integer id_traitement,
         @PathParam("id_champ") Integer id_champ,
         @PathParam("id_ouvrier") Integer id_ouvrier,
-        @PathParam("dateNow") String dateNowStr
+        @PathParam("dateNow") String dateNow
     ) throws UnsupportedEncodingException {        
-        Timestamp dateNow = Timestamp.valueOf(URLDecoder.decode(dateNowStr, StandardCharsets.UTF_8.name()));             
-        ejb.deleteSubitById(id_traitement, id_champ, id_ouvrier, true, dateNow);
+          
+        Timestamp originalTimestamp = Timestamp.valueOf(dateNow);
+        long milliseconds = (originalTimestamp.getTime() / 1000) * 1000;
+        Timestamp preciseTimestamp = new Timestamp(milliseconds);
+
+        SubitPK pk = new SubitPK();
+        pk.setId_traitement(id_traitement);
+        pk.setId_champ(id_champ);
+        pk.setId_ouvrier(id_ouvrier);
+        pk.setDateNow(preciseTimestamp);
+            
+        ejb.deleteSubitById(pk);
         return Response.ok().build();
     }
     
@@ -84,15 +93,19 @@ public class OperationWAR {
             @PathParam("id_traitement") Integer id_traitement,
             @PathParam("id_champ") Integer id_champ,        
             @PathParam("id_ouvrier") Integer id_ouvrier,
-            @PathParam("dateNow") String dateNowStr) 
+            @PathParam("dateNow") String dateNow) 
         throws UnsupportedEncodingException{
-            SubitPK pk = new SubitPK();
-            Timestamp dateNow = Timestamp.valueOf(URLDecoder.decode(dateNowStr, StandardCharsets.UTF_8.name()));             
-            pk.setId_traitement(id_traitement);
-            pk.setId_champ(id_champ);
-            pk.setId_ouvrier(id_ouvrier);
-            pk.setDateNow(dateNow);
+        
+        Timestamp originalTimestamp = Timestamp.valueOf(dateNow);
+        long milliseconds = (originalTimestamp.getTime() / 1000) * 1000;
+        Timestamp preciseTimestamp = new Timestamp(milliseconds);
+
+        SubitPK pk = new SubitPK();
+        pk.setId_traitement(id_traitement);
+        pk.setId_champ(id_champ);
+        pk.setId_ouvrier(id_ouvrier);
+        pk.setDateNow(preciseTimestamp);
             
-            ejb.valideOperation(pk);
+        ejb.valideOperation(pk);
     }   
 }
